@@ -42,6 +42,12 @@
             <version>4.0.0</version>
         </dependency>
 
+        <!--jpa数据源整合依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
         <!--jdbc驱动-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -59,6 +65,13 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!--mybatis整合依赖-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.3</version>
         </dependency>
 
         <dependency>

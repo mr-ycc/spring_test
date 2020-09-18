@@ -1,13 +1,18 @@
 package com.zkane.springdata.controller;
 
 import com.zkane.springdata.entity.Employee;
+import com.zkane.springdata.mapper.EmployeeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -18,6 +23,8 @@ import java.util.Map;
 @Controller
 public class EmployeeController {
 
+    @Autowired
+    EmployeeMapper employeeMapper;
     private static Logger logger= LoggerFactory.getLogger(EmployeeController.class);
 
     @RequestMapping("/emp")
@@ -32,5 +39,11 @@ public class EmployeeController {
 
         modelMap.addAttribute("employee",employee);
         return modelMap;
+    }
+
+    @GetMapping("/emp/{id}")
+    @ResponseBody
+    public Employee getEmp(@PathVariable("id") Integer id) throws SQLException {
+        return employeeMapper.getEmpById(id);
     }
 }

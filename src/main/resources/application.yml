@@ -14,7 +14,6 @@ spring:
 #      - classpath:sql/department.sql
 #      - classpath:sql/employee.sql
     initialization-mode: always
-
     # 初始化大小，最小，最大
     initialSize: 4
     minIdle: 4
@@ -38,4 +37,8 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
-
+mybatis:
+  #  指定全局配置文件路径
+  config-location: classpath:mybatis/mybatis-config.xml
+#  指定sql映射文件路径
+  mapper-locations: classpath:mybatis/mapper/*.xml
