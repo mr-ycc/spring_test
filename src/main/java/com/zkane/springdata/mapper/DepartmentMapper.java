@@ -2,6 +2,7 @@ package com.zkane.springdata.mapper;
 
 import com.zkane.springdata.entity.Department;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 /**
  * @author yuancc
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.*;
  * @Version V1.0
  */
 @Mapper
+@Component
 public interface DepartmentMapper {
 
     @Select("select * from department where id=#{id}")
