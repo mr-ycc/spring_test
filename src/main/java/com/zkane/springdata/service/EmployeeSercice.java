@@ -1,20 +1,15 @@
-package com.zkane.springdata.mapper;
+package com.zkane.springdata.service;
 
 import com.zkane.springdata.entity.Employee;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 
 /**
  * @author yuancc
- * @Date 2020-09-18 10:17
+ * @Date 2020-09-22 10:54
  * @Version V1.0
  */
-@Mapper
-@Component
-public interface EmployeeMapper {
+public interface EmployeeSercice {
 
     /**
      *
@@ -22,7 +17,6 @@ public interface EmployeeMapper {
      * @return
      * @throws SQLException
      */
-    @Select("select * from employee where id=#{id}")
     public Employee getEmpById(Integer id) throws SQLException;
 
     /**
