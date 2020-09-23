@@ -1,5 +1,7 @@
 package com.zkane.springdata.entity;
 
+import java.io.Serializable;
+
 /**
  * 员工实体类
  *
@@ -7,7 +9,9 @@ package com.zkane.springdata.entity;
  * @Date 2020-09-17 15:49
  * @Version V1.0
  */
-public class Employee {
+public class Employee implements Serializable {
+
+    static final long serialVersionUID = 42L;
     /**
      * 员工编号
      */

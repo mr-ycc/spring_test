@@ -4,6 +4,8 @@ import com.zkane.springdata.entity.Department;
 import com.zkane.springdata.mapper.DepartmentMapper;
 import com.zkane.springdata.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,12 +14,14 @@ import org.springframework.stereotype.Service;
  * @Version V1.0
  */
 @Service("deptService")
+@CacheConfig(cacheNames = {"dept"},cacheManager = "deptCacheManager")
 public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     DepartmentMapper departmentMapper;
 
     @Override
+    @Cacheable(key = "#id",unless = "#result==null")//蒋方法返回值保存到缓存中
     public Department getDeptById(Integer id) {
         return departmentMapper.getDeptById(id);
     }

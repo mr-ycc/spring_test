@@ -5,11 +5,14 @@ import com.zkane.springdata.service.EmployeeSercice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.sql.SQLException;
 
 /**
@@ -22,6 +25,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeSercice employeeSercice;
+
+    @Resource(name = "empCacheManager")
+    RedisCacheManager redisCacheManager;
 
     private static Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
@@ -83,6 +89,23 @@ public class EmployeeController {
         logger.info("查询" + lastName + "员工信息");
         Employee emp = employeeSercice.getEmpByLastName(lastName);
         return emp;
+    }
+
+    /**
+     * 编码方式进行redis缓存
+     *     ---使用缓存管理器获取缓存对象，进行api调用
+     * @return
+     */
+    @GetMapping("/emp/cache")
+    @ResponseBody
+    public Employee getEmp(){
+        Employee employee = new Employee("rookies", 1);
+
+        //获取缓存
+        Cache cache = redisCacheManager.getCache("emp");
+        //向emp缓存对象中添加数据
+        cache.put("emp-01",employee);
+        return  employee;
     }
 
 }

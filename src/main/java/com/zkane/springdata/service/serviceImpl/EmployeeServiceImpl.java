@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @Version V1.0
  */
 @Service("empService")
-@CacheConfig(cacheNames = {"emp"})
+@CacheConfig(cacheNames = {"emp"},cacheManager = "empCacheManager")
 public class EmployeeServiceImpl implements EmployeeSercice {
 
     @Autowired
@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeSercice {
 
     @Override
     //开启缓存，将方法返回结果放到缓存，每次方法执行前，先从缓存中查询
-    @Cacheable(/*key = "#id"*/keyGenerator = "myKeyGenerator",condition = "#id>0", unless = "#result==null")
+    @Cacheable(key = "#id"/*keyGenerator = "myKeyGenerator"*/,condition = "#id>0", unless = "#result==null")
     public Employee getEmpById(Integer id) throws SQLException {
         return employeeMapper.getEmpById(id);
     }

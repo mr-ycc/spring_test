@@ -1,11 +1,14 @@
 package com.zkane.springdata.entity;
 
+import java.io.Serializable;
+
 /**
  * @author 29204
  * @Date 2020-09-17 10:48
  */
-public class Department {
+public class Department implements Serializable {
 
+    static final long serialVersionUID = 42L;
     /**
      * 部门编号
      */
